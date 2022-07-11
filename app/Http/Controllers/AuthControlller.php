@@ -44,6 +44,7 @@ class AuthControlller extends Controller
             'email' => $twitchUser['email'],
         ]);
 
+        $request->session()->put('session:timestamp', time());
         Auth::loginUsingId($user->id);
 
         return redirect()->to('/');
