@@ -54,7 +54,7 @@ class StreamsController extends Controller
 
         return response()->json([
             'data' => array_values($streamsStatistics),
-            'median_viewers_count' => $total_views / $count,
+            'median_viewers_count' => intVal($total_views / $count),
         ]);
     }
 }

@@ -21,7 +21,7 @@ export default {
         async updateStreamStatistics({commit}) {
             try {
                 let res = await axios.get('/api/streams/statistics')
-                commit('updateStreamsStatistics', res.data.data)
+                commit('updateStreamsStatistics', res.data)
             } catch (err) {}
         },
         async updateUserStatistics({commit}) {
