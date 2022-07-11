@@ -98,8 +98,9 @@ export default {
             { name: 'User statistics', href: '/statistics/user', requireAuth: true },
         ],
     }),
-    beforeRouteUpdate() {
+    beforeRouteLeave(to, from, next) {
         this.hasError = false
+        next()
     },
     async created() {
         await this.$store.dispatch('updateCsrfCookie')
