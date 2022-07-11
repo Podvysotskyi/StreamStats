@@ -98,10 +98,6 @@ export default {
             { name: 'User statistics', href: '/statistics/user', requireAuth: true },
         ],
     }),
-    beforeRouteLeave(to, from, next) {
-        this.hasError = false
-        next()
-    },
     async created() {
         await this.$store.dispatch('updateCsrfCookie')
         await this.$store.dispatch('updateUser')
@@ -109,6 +105,10 @@ export default {
  
         axios.interceptors.response.use((res) => res, () => {
             this.hasError = true
+        })
+
+        this.$watch(() => this.$route.path, () => {
+            this.hasError = false
         })
     },
 }
