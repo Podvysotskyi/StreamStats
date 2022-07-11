@@ -21,3 +21,5 @@ Route::middleware(['auth:sanctum', 'expire_session'])->group(function() {
 });
 
 Route::get('/games/top', [GamesController::class, 'top']);
+Route::get('/streams/top', [StreamsController::class, 'top']);
+Route::get('/streams/statistics', [StreamsController::class, 'statistics']);
