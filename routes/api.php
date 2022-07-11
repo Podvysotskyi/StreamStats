@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', [AuthControlller::class, 'user']);
+Route::middleware(['auth:sanctum', 'expire_session'])->group(function() {
+    Route::get('/user', [AuthControlller::class, 'user']);
+});

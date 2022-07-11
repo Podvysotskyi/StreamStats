@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\SessionExpired;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -20,6 +21,8 @@ class AuthTest extends TestCase
     public function test_get_user_response()
     {
         $user = User::factory()->create();
+
+        $this->withoutMiddleware(SessionExpired::class);
 
         $this->actingAs($user)->get('/api/user')
             ->assertStatus(200)
@@ -52,6 +55,9 @@ class AuthTest extends TestCase
     public function test_logout_response()
     {
         $user = User::factory()->create();
+
+        $this->withoutMiddleware(SessionExpired::class);
+
         $this->actingAs($user)->get('/logout')
             ->assertRedirect();
     }
@@ -65,7 +71,7 @@ class AuthTest extends TestCase
     {
         Http::fake([
             '*/token' => Http::response(['access_token' => 'test_token'], 200),
-            '*/helix/users' => Http::response(['data' => [['id' => 1, 'login' => 'test_login', 'email' => 'test_email']]], 200),
+            '*/helix/users*' => Http::response(['data' => [['id' => 1, 'login' => 'test_login', 'email' => 'test_email']]], 200),
         ]);
 
         $this->withSession(['auth:state' => 'test_state'])
