@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthControlller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('app');
 });
+
+Route::get('/login/twitch', [AuthControlller::class, 'login']);
+Route::any('/login/twitch/callback', [AuthControlller::class, 'callback']);
+Route::get('/logout', [AuthControlller::class, 'logout']);
