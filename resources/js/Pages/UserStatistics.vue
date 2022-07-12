@@ -45,11 +45,8 @@
         </template>
     </PanelComponent>
 
-    <PanelComponent title="Shared stream tags">
-        <template v-if="isLoading">
-            Loading...
-        </template>
-        <template v-else-if="statistics.shared_stream_tags.length > 0">
+    <PanelComponent title="Shared stream tags" v-if="!isLoading">
+        <template v-if="statistics.shared_stream_tags.length > 0">
             <span v-for="tag in statistics.shared_stream_tags" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mr-2">
                 {{ tag }}
             </span>
