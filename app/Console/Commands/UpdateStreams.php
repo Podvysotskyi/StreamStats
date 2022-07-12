@@ -57,7 +57,7 @@ class UpdateStreams extends Command
                 $ids[] = $stream->id;
 
                 // Update stream tags
-                if (count($streamData['tag_ids']) > 0) {
+                if (count($streamData['tag_ids'] ?? []) > 0) {
                     $tags = Tag::query()->whereIn('import_id', $streamData['tag_ids'])->pluck('id');
                     $stream->tags()->sync($tags);
                 } else {
