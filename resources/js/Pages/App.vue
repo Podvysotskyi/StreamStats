@@ -108,7 +108,11 @@ export default {
         })
 
         this.$watch(() => this.$route.path, () => {
-            this.hasError = false
+            if (this.$route.meta.requiresAuth && !this.isAuthenticated) {
+                this.hasError = true
+            } else {
+                this.hasError = false
+            }
         })
     },
 }
