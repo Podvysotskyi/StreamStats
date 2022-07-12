@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('stream_tags', function (Blueprint $table) {
             $table->unsignedBigInteger('stream_id')->index();
-            $table->foreign('stream_id')->references('id')->on('streams');
+            $table->foreign('stream_id')->references('id')->on('streams')->onDelete('cascade');
             $table->unsignedBigInteger('tag_id')->index();
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
             $table->primary(['stream_id', 'tag_id']);
         });
     }
