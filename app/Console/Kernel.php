@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\UpdateStreams;
+use App\Console\Commands\UpdateStreamTags;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(ImportStreamTags::class)->daily();
-        $schedule->command(UpdateStreamsData::class)->everyFifteenMinutes();
+        $schedule->command(UpdateStreamTags::class)->daily();
+        $schedule->command(UpdateStreams::class)->everyFifteenMinutes();
     }
 
     /**
